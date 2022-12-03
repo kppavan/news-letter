@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
+require("dotenv").config();
 
 // Creating express app
 // express app is used for post and get
@@ -50,7 +51,7 @@ app.post("/", function (req, res) {
   // Options for https
   const options = {
     method: "POST",
-    auth: "pavan:eee4140cafa98605f7a0c1096b45ee08-us21",
+    auth: "pavan:" + process.env.API_Key,
   };
 
   const request = https.request(url, options, function (response) {
@@ -71,6 +72,10 @@ app.post("/", function (req, res) {
 });
 
 app.post("/failure", function (req, res) {
+  res.redirect("/");
+});
+
+app.post("/success", function (req, res) {
   res.redirect("/");
 });
 
